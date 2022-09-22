@@ -5,9 +5,30 @@ import Header from "./components/Header";
 import EmployeeList from "./pages/EmployeeList";
 import CreateEmployee from "./pages/CreateEmployee";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { brown, grey, lightGreen, lime } from "@mui/material/colors";
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: lightGreen[700],
+    },
+    secondary: {
+      main: lime[900],
+    },
+    brown: {
+      main: brown[300],
+    },
+    grey: {
+      main: grey[300],
+    },
+  },
+});
 
 export default function App() {
   return (
+    <ThemeProvider theme={theme}>
     <BrowserRouter>
       <Header />
       <Routes>
@@ -16,6 +37,7 @@ export default function App() {
         <Route exact path="/employee-list" element={<EmployeeList/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+      </ThemeProvider>
   );
 }
