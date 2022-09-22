@@ -91,17 +91,6 @@ export default function Home(props) {
     resolver: yupResolver(schema),
   });
 
-
- /*  const submitForm = (data) => {
-    console.log(data); //, JSON.stringify(data));
-    
-    dispatch({
-      type: POST_EMPLOYEE,
-      payload: data
-  });
-  }; */
-  
-  //const onSubmit = (data, e) => console.log(data, e);
   const onError = (errors, e) => console.log(errors, e);
 
   let newId = Date.now();
@@ -137,16 +126,11 @@ console.log(employeeData)
 
   const [value, setValue] = useState(null);
 
-  //const selectvalue = "-- Select state --";
-
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className="App">
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-        
-
-
           <Grid container spacing={3}>
             <Grid item xs={6}>
               <Controller
@@ -178,6 +162,8 @@ console.log(employeeData)
                     variant="filled"
                     label="lastName"
                     {...register("lastName")}
+                    error={!!errors?.lastName}
+                    helperText={errors.lastName && errors.lastName.message}
                   />
                 )}
               />
@@ -300,6 +286,8 @@ console.log(employeeData)
                     variant="filled"
                     label="street"
                     {...register("street")}
+                    error={!!errors?.street}
+                    helperText={errors.street && errors.street.message}
                   />
                 )}
               />
@@ -316,6 +304,8 @@ console.log(employeeData)
                     variant="filled"
                     label="city"
                     {...register("city")}
+                    error={!!errors?.city}
+                    helperText={errors.city && errors.city.message}
                   />
                 )}
               />
@@ -353,6 +343,8 @@ console.log(employeeData)
                     variant="filled"
                     label="zipCode"
                     {...register("zipCode")}
+                    error={!!errors?.zipCode}
+                    helperText={errors.zipCode && errors.zipCode.message}
                   />
                 )}
               />

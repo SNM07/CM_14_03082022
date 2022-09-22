@@ -20,65 +20,26 @@ console.log(mockedEmployee);
 const EmployeeList = () => {
   const [tableData, setTableData] = useState([]);
 
-  /* const employees = useSelector(state => state.data.employees) || localStorage.getItem('employees');
-console.log(employees) */
+  /* const employeeForLocalStorage = useSelector(state => state.data.employees);
+  console.log(employeeForLocalStorage) */
 
   const [rows, setRows] = useState(tableData);
   const [deletedRows, setDeletedRows] = useState([]);
 
-  /*  useEffect(() => {
-    fetch("../data/mockedEmployeeList.js")
-      .then((data) => data.json())
-      .then((data) => setTableData(data))
-
-  }, [])  */
   useEffect(() => {
     fetch("../data/mockedEmployeeList.js").then((data) =>
       setTableData(mockedEmployee)
     );
   });
-  console.log(tableData);
 
-  /* const employeeForLocalStorage = useSelector(state => state.data.employees);
-
-  console.log(employeeForLocalStorage)
- */
   let employeesList =
     JSON.parse(window.localStorage.getItem("employees")) || tableData;
-  console.log(employeesList);
 
   let updatedEmployeesList = tableData.concat(employeesList);
-  console.log(updatedEmployeesList);
-
-  const rowstest = employeesList.map((item, index) => ({
-    id: index,
-    firstName: item.firstname,
-    lastName: item.lastName,
-    dateOfBirth: item.dateOfBirth,
-  }));
-
-  console.log(rowstest);
 
   return (
     <div style={{ height: 700, width: "100%" }}>
-      <DataGrid
-        rows={updatedEmployeesList}
-        columns={columns}
-        pageSize={100}
-        //getRowId={(row) => row._id}
-
-        //onSelectionModelChange={({ employeesList }) => {
-          //const rowIds = employeesList.map((rowId) =>
-            //parseInt(String(rowId), 10)
-          //);
-          //const rowsToDelete = employeesList.filter((row) =>
-            //rowIds.includes(row.id)
-          //);
-        //}}
-        /*setDeletedRows(rowsToDelete);
-          console.log(deletedRows);*/
-        //}}
-      />
+      <DataGrid rows={updatedEmployeesList} columns={columns} pageSize={100} />
     </div>
   );
 };
