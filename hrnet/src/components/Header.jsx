@@ -20,6 +20,7 @@ const Header = () => {
             alignItems: "center",
             border: 2,
             borderColor: "secondary.light",
+            pt: .4
           }}
         >
           <Grid className="createButtonContainer">
@@ -38,6 +39,7 @@ const Header = () => {
               component="img"
               sx={{
                 height: "100%",
+                maxHeight: "160px",
               }}
               alt="logo"
               src={logo}

@@ -7,6 +7,8 @@ import { departments } from "../data/departmentsList";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 
+import { v4 as uuid } from 'uuid';
+
 import { POST_EMPLOYEE } from "../store/actions/constant";
 
 import {
@@ -49,7 +51,7 @@ const schema = yup.object().shape({
   street: yup.string().required(),
   city: yup.string().required(),
   state: yup.string().required(),
-  zipCode: yup.number(),
+  zipCode: yup.string().required(),
 });
 
 /* schema.validate(data, { abortEarly: false }).then(function() {
@@ -75,7 +77,7 @@ export default function CreateEmployee(props) {
 
   const onError = (errors, e) => console.log(errors, e);
 
-  let newId = Date.now();
+  let newId = uuid();
 
   const onSubmit = async (e) => {
     console.log(e);
@@ -97,11 +99,11 @@ export default function CreateEmployee(props) {
       payload: employeeData,
     });
   };
-
+/*
   const employeeForLocalStorage = useSelector((state) => state.data.employees);
   localStorage.setItem("employees", JSON.stringify(employeeForLocalStorage));
 
-  console.log(employeeForLocalStorage);
+  console.log(employeeForLocalStorage);*/
 
   const [reqDate, setreqDate] = useState(new Date());
 
