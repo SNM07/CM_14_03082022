@@ -7,7 +7,10 @@ import { departments } from "../data/departmentsList";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store/store";
 
-import { v4 as uuid } from 'uuid';
+import { Modal } from "../components/Modal";
+
+
+import { v4 as uuid } from "uuid";
 
 import { POST_EMPLOYEE } from "../store/actions/constant";
 
@@ -16,6 +19,7 @@ import {
   Box,
   Button,
   Container,
+  FormHelperText,
   Grid,
   InputLabel,
   TextField,
@@ -62,6 +66,10 @@ const schema = yup.object().shape({
   }); */
 
 export default function CreateEmployee(props) {
+
+  const [showModal, setShowModal] = useState(false);
+  const closeModal = () => setShowModal(!showModal);
+
   const [data, setData] = useState("");
 
   const dispatch = useDispatch();
@@ -70,6 +78,7 @@ export default function CreateEmployee(props) {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -98,8 +107,10 @@ export default function CreateEmployee(props) {
       type: POST_EMPLOYEE,
       payload: employeeData,
     });
+    setShowModal(true);
+    reset();
   };
-/*
+  /*
   const employeeForLocalStorage = useSelector((state) => state.data.employees);
   localStorage.setItem("employees", JSON.stringify(employeeForLocalStorage));
 
@@ -110,6 +121,15 @@ export default function CreateEmployee(props) {
   const [value, setValue] = useState(null);
 
   return (
+    <>
+      {
+            showModal && <Modal
+        showModal={showModal}
+        closeModal={closeModal}
+        modalTitle="Wealth Health"
+        modalBody="New Employee added"
+      />
+        }
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className="App">
         <Box
@@ -136,7 +156,7 @@ export default function CreateEmployee(props) {
                       label="firstName"
                       {...register("firstName")}
                       error={!!errors?.firstName}
-                      helperText={errors.firstName && errors.firstName.message}
+                      helperText="First Name is a required field"
                     />
                   )}
                 />
@@ -154,7 +174,7 @@ export default function CreateEmployee(props) {
                       label="lastName"
                       {...register("lastName")}
                       error={!!errors?.lastName}
-                      helperText={errors.lastName && errors.lastName.message}
+                      helperText="Last Name is a required field"
                     />
                   )}
                 />
@@ -182,7 +202,6 @@ export default function CreateEmployee(props) {
                             console.log(invalid),
                             (
                               <TextField
-                                error={invalid}
                                 helperText={invalid ? error.message : null}
                                 id="dateOfBirth"
                                 variant="standard"
@@ -191,6 +210,7 @@ export default function CreateEmployee(props) {
                                 color="primary"
                                 autoComplete="bday"
                                 {...params}
+                                error={invalid}
                               />
                             )
                           )}
@@ -223,7 +243,6 @@ export default function CreateEmployee(props) {
                             console.log(invalid),
                             (
                               <TextField
-                                error={invalid}
                                 helperText={invalid ? error.message : null}
                                 id="startDate"
                                 variant="standard"
@@ -232,6 +251,7 @@ export default function CreateEmployee(props) {
                                 color="primary"
                                 autoComplete="bday"
                                 {...params}
+                                error={invalid}
                               />
                             )
                           )}
@@ -243,7 +263,7 @@ export default function CreateEmployee(props) {
               </Grid>
 
               <Grid item xs={12}>
-                <FormControl fullWidth>
+                <FormControl fullWidth error={Boolean(errors["department"])}>
                   <InputLabel>- Select a department -</InputLabel>
                   <Controller
                     control={control}
@@ -263,6 +283,9 @@ export default function CreateEmployee(props) {
                       </Select>
                     )}
                   />
+                  <FormHelperText>
+                    Department is a required field
+                  </FormHelperText>
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
@@ -278,7 +301,7 @@ export default function CreateEmployee(props) {
                       label="street"
                       {...register("street")}
                       error={!!errors?.street}
-                      helperText={errors.street && errors.street.message}
+                      helperText="Street is a required field"
                     />
                   )}
                 />
@@ -296,14 +319,14 @@ export default function CreateEmployee(props) {
                       label="city"
                       {...register("city")}
                       error={!!errors?.city}
-                      helperText={errors.city && errors.city.message}
+                      helperText="City is a required field"
                     />
                   )}
                 />
               </Grid>
 
               <Grid item xs={12}>
-                <FormControl fullWidth>
+                <FormControl fullWidth error={Boolean(errors["department"])}>
                   <InputLabel>- Select a state -</InputLabel>
                   <Controller
                     control={control}
@@ -319,6 +342,7 @@ export default function CreateEmployee(props) {
                       </Select>
                     )}
                   />
+                  <FormHelperText>State is a required field</FormHelperText>
                 </FormControl>
               </Grid>
 
@@ -335,7 +359,7 @@ export default function CreateEmployee(props) {
                       label="zipCode"
                       {...register("zipCode")}
                       error={!!errors?.zipCode}
-                      helperText={errors.zipCode && errors.zipCode.message}
+                      helperText="Zip Code is a required field"
                     />
                   )}
                 />
@@ -350,6 +374,7 @@ export default function CreateEmployee(props) {
           </form>
         </Box>
       </div>
-    </LocalizationProvider>
+      </LocalizationProvider>
+      </>
   );
 }
