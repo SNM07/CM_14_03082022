@@ -63,8 +63,6 @@ export default function CreateEmployee(props) {
     resolver: yupResolver(schema),
   });
 
-  const onError = (errors, e) => console.log(errors, e);
-
   let newId = uuid();
 
   const onSubmit = async (e) => {
@@ -81,7 +79,6 @@ export default function CreateEmployee(props) {
       state: e.state,
       zipCode: e.zipCode,
     };
-    console.log(employeeData);
     dispatch({
       type: POST_EMPLOYEE,
       payload: employeeData,
@@ -111,7 +108,7 @@ export default function CreateEmployee(props) {
             alignItems="center"
             sx={{ boxShadow: 2, borderRadius: 1 }}
           >
-            <form onSubmit={handleSubmit(onSubmit, onError)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Controller
@@ -123,10 +120,12 @@ export default function CreateEmployee(props) {
                         {...field}
                         fullWidth
                         variant="filled"
-                        label="firstName"
+                        label="First Name"
                         {...register("firstName")}
                         error={!!errors?.firstName}
-                        helperText="First Name is a required field"
+                        helperText={
+                          errors.firstName && "First Name is a required field"
+                        }
                       />
                     )}
                   />
@@ -141,10 +140,12 @@ export default function CreateEmployee(props) {
                         {...field}
                         fullWidth
                         variant="filled"
-                        label="lastName"
+                        label="Last Name"
                         {...register("lastName")}
                         error={!!errors?.lastName}
-                        helperText="Last Name is a required field"
+                        helperText={
+                          errors.lastName && "Last Name is a required field"
+                        }
                       />
                     )}
                   />
@@ -168,19 +169,17 @@ export default function CreateEmployee(props) {
                               onChange(moment(value).format("YYYY-MM-DD"))
                             }
                             renderInput={(params) => (
-                              (
-                                <TextField
-                                  helperText={invalid ? error.message : null}
-                                  id="dateOfBirth"
-                                  variant="standard"
-                                  margin="dense"
-                                  fullWidth
-                                  color="primary"
-                                  autoComplete="bday"
-                                  {...params}
-                                  error={invalid}
-                                />
-                              )
+                              <TextField
+                                helperText={invalid ? error.message : null}
+                                id="dateOfBirth"
+                                variant="standard"
+                                margin="dense"
+                                fullWidth
+                                color="primary"
+                                autoComplete="bday"
+                                {...params}
+                                error={invalid}
+                              />
                             )}
                           />
                         )}
@@ -207,19 +206,17 @@ export default function CreateEmployee(props) {
                               onChange(moment(value).format("YYYY-MM-DD"))
                             }
                             renderInput={(params) => (
-                              (
-                                <TextField
-                                  helperText={invalid ? error.message : null}
-                                  id="startDate"
-                                  variant="standard"
-                                  margin="dense"
-                                  fullWidth
-                                  color="primary"
-                                  autoComplete="bday"
-                                  {...params}
-                                  error={invalid}
-                                />
-                              )
+                              <TextField
+                                helperText={invalid ? error.message : null}
+                                id="startDate"
+                                variant="standard"
+                                margin="dense"
+                                fullWidth
+                                color="primary"
+                                autoComplete="bday"
+                                {...params}
+                                error={invalid}
+                              />
                             )}
                           />
                         )}
@@ -238,10 +235,10 @@ export default function CreateEmployee(props) {
                         <Select
                           {...field}
                           fullWidth
-                          label="- Select a department -"
+                          label="- Select a Department -"
                         >
                           {departments.map(({ value, label, index }) => (
-                            <MenuItem key={index} value={value}>
+                            <MenuItem key={value} value={value}>
                               {label}
                             </MenuItem>
                           ))}
@@ -249,7 +246,7 @@ export default function CreateEmployee(props) {
                       )}
                     />
                     <FormHelperText>
-                      Department is a required field
+                      {errors.department && "Department is a required field"}
                     </FormHelperText>
                   </FormControl>
                 </Grid>
@@ -263,10 +260,12 @@ export default function CreateEmployee(props) {
                         {...field}
                         fullWidth
                         variant="filled"
-                        label="street"
+                        label="Street"
                         {...register("street")}
                         error={!!errors?.street}
-                        helperText="Street is a required field"
+                        helperText={
+                          errors.street && "Street is a required field"
+                        }
                       />
                     )}
                   />
@@ -281,17 +280,17 @@ export default function CreateEmployee(props) {
                         {...field}
                         fullWidth
                         variant="filled"
-                        label="city"
+                        label="City"
                         {...register("city")}
                         error={!!errors?.city}
-                        helperText="City is a required field"
+                        helperText={errors.city && "City is a required field"}
                       />
                     )}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl fullWidth error={Boolean(errors["department"])}>
-                    <InputLabel>- Select a state -</InputLabel>
+                  <FormControl fullWidth error={Boolean(errors["state"])}>
+                    <InputLabel>- Select a State -</InputLabel>
                     <Controller
                       control={control}
                       name="state"
@@ -299,14 +298,16 @@ export default function CreateEmployee(props) {
                       render={({ field }) => (
                         <Select {...field} fullWidth>
                           {states.map(({ name, abbreviation, index }) => (
-                            <MenuItem key={index} value={name}>
+                            <MenuItem key={abbreviation} value={name}>
                               {name} ({abbreviation})
                             </MenuItem>
                           ))}
                         </Select>
                       )}
                     />
-                    <FormHelperText>State is a required field</FormHelperText>
+                    <FormHelperText>
+                      {errors.state && "State is a required field"}
+                    </FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
@@ -319,10 +320,12 @@ export default function CreateEmployee(props) {
                         {...field}
                         fullWidth
                         variant="filled"
-                        label="zipCode"
+                        label="Zip Code"
                         {...register("zipCode")}
                         error={!!errors?.zipCode}
-                        helperText="Zip Code is a required field"
+                        helperText={
+                          errors.zipCode && "Zip Code is a required field"
+                        }
                       />
                     )}
                   />

@@ -21,7 +21,6 @@ export default function App() {
   useEffect(() => {
     fetch("../data/mockedEmployeeList.js").then(
       (data) => setTableData(mockedEmployee),
-      console.log(tableData)
     );
     dispatch({
       type: POST_EMPLOYEE,

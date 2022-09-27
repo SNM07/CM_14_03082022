@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .modalMain {
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  .modalBg {
+    background: rgba(52, 52, 52, 0.8);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  .modalBody {
+    background: rgb(255, 255, 255);
+    width: 50%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+  }
+  
+  .modalTitle {
+    background: #85c04e;
+    color: #ffffff;
+    padding: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modalTitle span {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .modalBody h4 {
+    font-size: 1.8rem;
+    color: #5e8838;
+  }
+  
+  .modalBody p {
+    font-size: 1rem;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 2%;
+    margin: 2%;
+  }
+  
+  .modalBtn button {
+    display: block;
+    font-size: 1rem;
+    margin-left: auto;
+    padding: 2% 4%;
+    background: #5e8838;
+    color: rgb(255, 255, 255);
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  

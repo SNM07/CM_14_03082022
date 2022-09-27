@@ -33,7 +33,7 @@ export default function ErrorPage() {
             component={Link}
             to="/"
             variant="h2"
-            font-size="8vh"
+            fontSize="8vh"
             color="secondary.main"
             className="errorText"
             style={{ textDecoration: "none", textAlign: "center" }}

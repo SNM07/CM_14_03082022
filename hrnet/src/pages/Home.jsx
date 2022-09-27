@@ -33,7 +33,7 @@ export default function Home() {
             component={Link}
             to="/"
             variant="h2"
-            font-size="8vh"
+            fontSize="8vh"
             color="secondary.main"
             className="welcome"
             style={{ textDecoration: "none", textAlign: "center" }}
