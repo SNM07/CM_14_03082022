@@ -1,7 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo-WH.jpg";
-
 import { Box, Grid, Typography } from "@mui/material";
 
 export default function Home() {
@@ -26,14 +25,15 @@ export default function Home() {
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
-          mt: "30vh",
+          mt: "32vh",
         }}
       >
-        <Grid className="createButtonContainer">
+        <Grid className="welcomeMessage">
           <Typography
             component={Link}
             to="/"
             variant="h2"
+            font-size="8vh"
             color="secondary.main"
             className="welcome"
             style={{ textDecoration: "none", textAlign: "center" }}
@@ -41,17 +41,6 @@ export default function Home() {
             Welcome{" "}
           </Typography>
         </Grid>
-        {/* <Grid component={Link} to="/" className="logoContainer">
-            <Box
-              component="img"
-              sx={{
-                height: "200%",
-                opacity: ".5",
-              }}
-              alt="logo"
-              src={logo}
-            ></Box>
-          </Grid> */}
       </Box>
     </>
   );

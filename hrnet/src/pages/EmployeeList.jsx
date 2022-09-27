@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { DataGrid, GridToolbar, gridClasses } from "@mui/x-data-grid";
-import { mockedEmployee } from "../data/mockedEmployeeList";
+import React, { useState } from "react";
+import { GridToolbar } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
-import GetEmployees from "../services/service";
-import { alpha, styled } from "@mui/material/styles";
+import { StripedDataGrid as GridTheme } from "../styles/styles";
 
 const columns = [
   { field: "firstName", headerName: "First Name", flex: 1 },
@@ -43,62 +41,12 @@ const columnGroupingModel = [
   },
 ];
 
-const ODD_OPACITY = 0.2;
-
-const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
-  [`& .${gridClasses.row}.even`]: {
-    backgroundColor: theme.palette.grey[200],
-    "&:hover, &.Mui-hovered": {
-      backgroundColor: alpha(theme.palette.primary.main, ODD_OPACITY),
-      "@media (hover: none)": {
-        backgroundColor: "transparent",
-      },
-    },
-    "&.Mui-selected": {
-      backgroundColor: alpha(
-        theme.palette.primary.main,
-        ODD_OPACITY + theme.palette.action.selectedOpacity
-      ),
-      "&:hover, &.Mui-hovered": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          ODD_OPACITY +
-            theme.palette.action.selectedOpacity +
-            theme.palette.action.hoverOpacity
-        ),
-        // Reset on touch devices, it doesn't add specificity
-        "@media (hover: none)": {
-          backgroundColor: alpha(
-            theme.palette.primary.main,
-            ODD_OPACITY + theme.palette.action.selectedOpacity
-          ),
-        },
-      },
-    },
-  },
-}));
+let StripedDataGrid = GridTheme;
 
 const EmployeeList = () => {
-  const [tableData, setTableData] = useState([]);
-
-  const employeeForLocalStorage = useSelector(state => state.data.employees);
-  console.log(employeeForLocalStorage)
+  const employeeForLocalStorage = useSelector((state) => state.data.employees);
 
   const [pageSize, setPageSize] = useState(10);
-
-  /* useEffect(() => {
-    fetch("../data/mockedEmployeeList.js").then((data) =>
-      setTableData(mockedEmployee)
-    );
-  }); */
-
- /*  let employeesList =
-    JSON.parse(window.localStorage.getItem("employees")) || tableData;
-
-  let updatedEmployeesList = tableData.concat(employeesList);
- */
-
-  
 
   return (
     <div style={{ height: 700, width: "100%" }}>
