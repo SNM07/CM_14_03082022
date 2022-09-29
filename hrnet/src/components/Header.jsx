@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo-WH.jpg";
-import {
-  Box,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 
 const Header = () => {
   return (
@@ -20,7 +16,7 @@ const Header = () => {
             alignItems: "center",
             border: 2,
             borderColor: "secondary.light",
-            pt: .4
+            pt: 0.4,
           }}
         >
           <Grid className="createButtonContainer">
@@ -29,12 +25,18 @@ const Header = () => {
               to="/create-employee"
               variant="contained"
               className="button"
+              aria-label="create-employee"
               sx={{ ml: 2 }}
             >
               Create New Employee
             </Button>
           </Grid>
-          <Grid component={Link} to="/" className="logoContainer">
+          <Grid
+            component={Link}
+            to="/"
+            className="logoContainer"
+            aria-label="to-homepage"
+          >
             <Box
               component="img"
               sx={{
@@ -51,6 +53,7 @@ const Header = () => {
               to="/employee-list"
               variant="contained"
               className="button"
+              aria-label="employees-list"
               sx={{ mr: 2 }}
             >
               View Current Employees

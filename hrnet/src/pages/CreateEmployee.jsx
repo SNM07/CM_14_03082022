@@ -21,6 +21,7 @@ import {
   Select,
   MenuItem,
   FormControl,
+  Typography,
 } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -110,228 +111,280 @@ export default function CreateEmployee(props) {
           >
             <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Controller
-                    control={control}
-                    name="firstName"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        variant="filled"
-                        label="First Name"
-                        {...register("firstName")}
-                        error={!!errors?.firstName}
-                        helperText={
-                          errors.firstName && "First Name is a required field"
-                        }
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    control={control}
-                    name="lastName"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        variant="filled"
-                        label="Last Name"
-                        {...register("lastName")}
-                        error={!!errors?.lastName}
-                        helperText={
-                          errors.lastName && "Last Name is a required field"
-                        }
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Container maxWidth="lg">
-                    <Box>
-                      <Controller
-                        name="dateOfBirth"
-                        control={control}
-                        defaultValue={null}
-                        render={({
-                          field: { onChange, value },
-                          fieldState: { error, invalid },
-                        }) => (
-                          <DatePicker
-                            label="Date of birth"
-                            disableFuture
-                            value={value}
-                            onChange={(value) =>
-                              onChange(moment(value).format("YYYY-MM-DD"))
-                            }
-                            renderInput={(params) => (
-                              <TextField
-                                helperText={invalid ? error.message : null}
-                                id="dateOfBirth"
-                                variant="standard"
-                                margin="dense"
-                                fullWidth
-                                color="primary"
-                                autoComplete="bday"
-                                {...params}
-                                error={invalid}
-                              />
-                            )}
-                          />
-                        )}
-                      />
-                    </Box>
-                  </Container>
-                </Grid>
-                <Grid item xs={12}>
-                  <Container maxWidth="lg">
-                    <Box>
-                      <Controller
-                        name="startDate"
-                        control={control}
-                        defaultValue={null}
-                        render={({
-                          field: { onChange, value },
-                          fieldState: { error, invalid },
-                        }) => (
-                          <DatePicker
-                            label="Start Date"
-                            disableFuture
-                            value={value}
-                            onChange={(value) =>
-                              onChange(moment(value).format("YYYY-MM-DD"))
-                            }
-                            renderInput={(params) => (
-                              <TextField
-                                helperText={invalid ? error.message : null}
-                                id="startDate"
-                                variant="standard"
-                                margin="dense"
-                                fullWidth
-                                color="primary"
-                                autoComplete="bday"
-                                {...params}
-                                error={invalid}
-                              />
-                            )}
-                          />
-                        )}
-                      />
-                    </Box>
-                  </Container>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth error={Boolean(errors["department"])}>
-                    <InputLabel>- Select a department -</InputLabel>
+                <Box
+                  spacing={2}
+                  width="100%"
+                  mt={2}
+                  ml={2}
+                  p={2}
+                  sx={{
+                    border: 2,
+                    borderColor: "primary.main",
+                    borderRadius: 2,
+                  }}
+                >
+                  <Typography color="primary.dark" variant="h5">
+                    Identity
+                  </Typography>
+                  <Grid item xs={12} my={2}>
                     <Controller
                       control={control}
-                      name="department"
+                      name="firstName"
                       defaultValue=""
                       render={({ field }) => (
-                        <Select
+                        <TextField
                           {...field}
                           fullWidth
-                          label="- Select a Department -"
-                        >
-                          {departments.map(({ value, label, index }) => (
-                            <MenuItem key={value} value={value}>
-                              {label}
-                            </MenuItem>
-                          ))}
-                        </Select>
+                          variant="filled"
+                          label="First Name"
+                          {...register("firstName")}
+                          error={!!errors?.firstName}
+                          helperText={
+                            errors.firstName && "First Name is a required field"
+                          }
+                        />
                       )}
                     />
-                    <FormHelperText>
-                      {errors.department && "Department is a required field"}
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    control={control}
-                    name="street"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        variant="filled"
-                        label="Street"
-                        {...register("street")}
-                        error={!!errors?.street}
-                        helperText={
-                          errors.street && "Street is a required field"
-                        }
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    control={control}
-                    name="city"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        variant="filled"
-                        label="City"
-                        {...register("city")}
-                        error={!!errors?.city}
-                        helperText={errors.city && "City is a required field"}
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth error={Boolean(errors["state"])}>
-                    <InputLabel>- Select a State -</InputLabel>
+                  </Grid>
+                  <Grid item xs={12} my={2}>
                     <Controller
                       control={control}
-                      name="state"
+                      name="lastName"
                       defaultValue=""
                       render={({ field }) => (
-                        <Select {...field} fullWidth>
-                          {states.map(({ name, abbreviation, index }) => (
-                            <MenuItem key={abbreviation} value={name}>
-                              {name} ({abbreviation})
-                            </MenuItem>
-                          ))}
-                        </Select>
+                        <TextField
+                          {...field}
+                          fullWidth
+                          variant="filled"
+                          label="Last Name"
+                          {...register("lastName")}
+                          error={!!errors?.lastName}
+                          helperText={
+                            errors.lastName && "Last Name is a required field"
+                          }
+                        />
                       )}
                     />
-                    <FormHelperText>
-                      {errors.state && "State is a required field"}
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <Controller
-                    control={control}
-                    name="zipCode"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        variant="filled"
-                        label="Zip Code"
-                        {...register("zipCode")}
-                        error={!!errors?.zipCode}
-                        helperText={
-                          errors.zipCode && "Zip Code is a required field"
-                        }
+                  </Grid>
+                  <Grid item xs={12} my={2}>
+                    <Container maxWidth="lg">
+                      <Box>
+                        <Controller
+                          name="dateOfBirth"
+                          control={control}
+                          defaultValue={null}
+                          render={({
+                            field: { onChange, value },
+                            fieldState: { error, invalid },
+                          }) => (
+                            <DatePicker
+                              label="Date of birth"
+                              disableFuture
+                              value={value}
+                              onChange={(value) =>
+                                onChange(moment(value).format("YYYY-MM-DD"))
+                              }
+                              renderInput={(params) => (
+                                <TextField
+                                  helperText={invalid ? error.message : null}
+                                  id="dateOfBirth"
+                                  variant="standard"
+                                  margin="dense"
+                                  fullWidth
+                                  color="primary"
+                                  autoComplete="bday"
+                                  {...params}
+                                  error={invalid}
+                                />
+                              )}
+                            />
+                          )}
+                        />
+                      </Box>
+                    </Container>
+                  </Grid>
+                </Box>
+                <Box
+                  spacing={2}
+                  width="100%"
+                  mt={2}
+                  ml={2}
+                  p={2}
+                  sx={{
+                    border: 2,
+                    borderColor: "grey.main",
+                    borderRadius: 2,
+                  }}
+                >
+                  <Typography color="primary.light" variant="h5">
+                    Informations
+                  </Typography>
+                  <Grid item xs={12} my={2}>
+                    <Container maxWidth="lg">
+                      <Box>
+                        <Controller
+                          name="startDate"
+                          control={control}
+                          defaultValue={null}
+                          render={({
+                            field: { onChange, value },
+                            fieldState: { error, invalid },
+                          }) => (
+                            <DatePicker
+                              label="Start Date"
+                              disableFuture
+                              value={value}
+                              onChange={(value) =>
+                                onChange(moment(value).format("YYYY-MM-DD"))
+                              }
+                              renderInput={(params) => (
+                                <TextField
+                                  helperText={invalid ? error.message : null}
+                                  id="startDate"
+                                  variant="standard"
+                                  margin="dense"
+                                  fullWidth
+                                  color="primary"
+                                  autoComplete="bday"
+                                  {...params}
+                                  error={invalid}
+                                />
+                              )}
+                            />
+                          )}
+                        />
+                      </Box>
+                    </Container>
+                  </Grid>
+                  <Grid item xs={12} my={2}>
+                    <FormControl
+                      fullWidth
+                      error={Boolean(errors["department"])}
+                    >
+                      <InputLabel>- Select a department -</InputLabel>
+                      <Controller
+                        control={control}
+                        name="department"
+                        defaultValue=""
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            fullWidth
+                            label="- Select a Department -"
+                          >
+                            {departments.map(({ value, label, index }) => (
+                              <MenuItem key={value} value={value}>
+                                {label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        )}
                       />
-                    )}
-                  />
-                </Grid>
+                      <FormHelperText>
+                        {errors.department && "Department is a required field"}
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Box>
+                <Box
+                  spacing={2}
+                  width="100%"
+                  mt={2}
+                  ml={2}
+                  p={2}
+                  bgcolor="primary.light"
+                  sx={{
+                    border: 2,
+                    borderColor: "secondary.main",
+                    borderRadius: 2,
+                  }}
+                >
+                  <Typography color="white" variant="h5">
+                    Address
+                  </Typography>
+                  <Grid item xs={12} my={2} bgcolor="#eeeeee" borderRadius={1}>
+                    <Controller
+                      control={control}
+                      name="street"
+                      defaultValue=""
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          fullWidth
+                          variant="filled"
+                          label="Street"
+                          {...register("street")}
+                          error={!!errors?.street}
+                          helperText={
+                            errors.street && "Street is a required field"
+                          }
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} my={2} bgcolor="#eeeeee" borderRadius={1}>
+                    <Controller
+                      control={control}
+                      name="city"
+                      defaultValue=""
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          fullWidth
+                          variant="filled"
+                          label="City"
+                          {...register("city")}
+                          error={!!errors?.city}
+                          helperText={errors.city && "City is a required field"}
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12} my={2} bgcolor="white" borderRadius={1}>
+                    <FormControl fullWidth error={Boolean(errors["state"])}>
+                      <InputLabel>- Select a State -</InputLabel>
+                      <Controller
+                        control={control}
+                        name="state"
+                        defaultValue=""
+                        render={({ field }) => (
+                          <Select {...field} fullWidth>
+                            {states.map(({ name, abbreviation, index }) => (
+                              <MenuItem key={abbreviation} value={name}>
+                                {name} ({abbreviation})
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        )}
+                      />
+                      <FormHelperText>
+                        {errors.state && "State is a required field"}
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} my={2} bgcolor="#eeeeee" borderRadius={1}>
+                    <Controller
+                      control={control}
+                      name="zipCode"
+                      defaultValue=""
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          fullWidth
+                          variant="filled"
+                          label="Zip Code"
+                          {...register("zipCode")}
+                          error={!!errors?.zipCode}
+                          helperText={
+                            errors.zipCode && "Zip Code is a required field"
+                          }
+                        />
+                      )}
+                    />
+                  </Grid>
+                </Box>
                 <Grid item xs={12} mt={3} style={{ textAlign: "center" }}>
-                  <Button variant="outlined" type="submit">
+                  <Button size="large" variant="outlined" type="submit">
                     Submit
                   </Button>
                 </Grid>
