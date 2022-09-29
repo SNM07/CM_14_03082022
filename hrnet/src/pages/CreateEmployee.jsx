@@ -6,8 +6,6 @@ import { departments } from "../data/departmentsList";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-//import { Modal } from "../components/Modal";
-//@ts-ignore
 import { Modal } from "modal-snm07-p14";
 
 import { POST_EMPLOYEE } from "../store/actions/constant";
